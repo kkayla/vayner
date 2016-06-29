@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="/d3.min.js"></script>
+<title>Playing with Ivy and Tone!</title>
+<style>
+.node {
+  stroke: #lavender;
+  stroke-width: 3px;
+}
+.link{
+  stroke: #orange;
+  stroke-width: 3px;
+}
+</style>
+
+</head>
+<body>
+<script>
+  var width= 640;
+    height = 480;
+
+  var svg = d3.select('body').append('svg')
+    .attr('width', width)
+    .attr('height', height);
+// ^creates an svg to hold the visualization
+
+var graph = {
+  // "tones":{"document_tone.tone_categories.tones.score": " ", "document_tone.tone_categories.tones.tone_id": " ",}
+  //includes the 3 categories: SOCIAL, EMOTIONAL & LANGUAGE tones
+  "toneScores": [
+  {"score": 0.06212, "tone_id": "anger"},
+  {"score": 0.104997, "tone_id": "disgust"},
+  {"score": 0.065878, "tone_id": "fear"},
+  {"score": 0.745284, "tone_id": "joy"},
+  {"score": 0.185996, "tone_id": "sadness"},
+  {"score": 0, "tone_id": "analytical"},
+  {"score": 0.724 , "tone_id": "confident"},
+  {"score": 0, "tone_id": "tentative"},
+  {"score": 0.395, "tone_id": "openness_big5"},
+  {"score": 0.74, "tone_id": "conscientiousness_big5"},
+  {"score": 0.705, "tone_id": "extraversion_big5"},
+  {"score": 0.937, "tone_id": "agreeableness_big5"},
+  {"score": 0.63,"tone_id": "emotional_range_big5"}
+  ],
+  //write method for each employee within each team to show results for each team members response broken down into categories of social, emotional & language
+  //take scores from all emloyee's on a team  (which will include 3 categories of scores)
+  //show average score in each category based on team member responses
+  //link teams together
+  "teamTones":[
+    { "employeeId": 678, "team_id":  272 },
+    { "employeeId": 11, "team_id":  274 },
+    { "employeeId": 11, "team_id":  272 },
+    { "employeeId": 11, "team_id":  0274 },
+    { "employeeId": 11, "team_id":  272 },
+    { "employeeId": 11, "team_id":  274 },
+    { "employeeId": 11, "team_id":  274 },
+    { "employeeId": 11, "team_id":  274 },
+    { "employeeId": 11, "team_id":  274 },
+    { "employeeId": 11, "team_id":  272 },
+    { "employeeId": 11, "team_id":  272 },
+    { "employeeId": 11, "team_id":  274 },
+    { "employeeId": 11, "team_id":  272 },
+    ]
+  };
+  var toneScore = graph.toneScore
+        toneScore.forEach(function(d){
+          d.score = +d.score;
+          d.tone_id = +d.tone_id;
+      }),
+      toneCategory  = graph.toneCategory
+        toneScore.forEach(function(d){
+          d.score = +d.score;
+          d.tone_id = +d.tone_id;
+      });
+
+  var force = d3.layout.force()
+  .size([width, height])
+  .toneScores(toneScore)
+  .teamTones(teamTones);
+//creating a force layout object to layout the dimensions of the scores and collective team tones
+
+force.linkDistance(width/3.05);
+          //extrating the tonescore and tonecategory from the data
+          var force  = d3.layout.force()
+var 
+
+
+</script>
+</body>
+</html>
