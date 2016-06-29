@@ -50,19 +50,19 @@ var graph = {
   //show average score in each category based on team member responses
   //link teams together
   "links":[
-    { "employeeId": 678, "team_id":  272 },
-    { "employeeId": 11, "team_id":  274 },
-    { "employeeId": 11, "team_id":  272 },
-    { "employeeId": 11, "team_id":  0274 },
-    { "employeeId": 11, "team_id":  272 },
-    { "employeeId": 11, "team_id":  274 },
-    { "employeeId": 11, "team_id":  274 },
-    { "employeeId": 11, "team_id":  274 },
-    { "employeeId": 11, "team_id":  274 },
-    { "employeeId": 11, "team_id":  272 },
-    { "employeeId": 11, "team_id":  272 },
-    { "employeeId": 11, "team_id":  274 },
-    { "employeeId": 11, "team_id":  272 },
+    { "employee_id": 678, "team_id":  272 },
+    { "employee_id": 11, "team_id":  274 },
+    { "employee_id": 11, "team_id":  272 },
+    { "employee_id": 11, "team_id":  0274 },
+    { "employee_id": 11, "team_id":  272 },
+    { "employee_id": 11, "team_id":  274 },
+    { "employee_id": 11, "team_id":  274 },
+    { "employee_id": 11, "team_id":  274 },
+    { "employee_id": 11, "team_id":  274 },
+    { "employee_id": 11, "team_id":  272 },
+    { "employee_id": 11, "team_id":  272 },
+    { "employee_id": 11, "team_id":  274 },
+    { "employee_id": 11, "team_id":  272 },
   ]
   };
   // nodes are now employee scores and links are teams of employees
@@ -99,16 +99,15 @@ var node = svg.selectAll('.node')
 force.on('end', function(){
 
   node.attr('r', width/100)
-      .attr('cx', function(d){return d.x;}),
-      .attr('cy', function(d){return d.y;});
+      .attr('cx', function(d){return d.employee_id;})
+      .attr('cy', function(d){return d.team_id;});
 
-  link.attr('x1' function(d) {return d.source.x;}),
-      .attr('y2', function(d) {return d.source.y}),
-      .attr('x1', function(d) {return d.target.x}),
+  link.attr('x1' function(d) {return d.source.x})
+      .attr('y2', function(d) {return d.source.y})
+      .attr('x1', function(d) {return d.target.x})
       .attr('y2', function(d) {return d.target.y});
 
 });
-
 force.start();
 //i'm defining a function that i want to layout to call once the force layout calculations are done
 //force layout updates the x and y properties that define where the node should be centered. to move it we have to set the svg to their new values so they're visible
