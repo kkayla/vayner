@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="/d3.min.js"></script>
+<script src="d3.min.js"></script>
 <title>Playing with Ivy and Tone!</title>
 <style>
-.node {
+.toneScores {
   stroke: #lavender;
   stroke-width: 3px;
 }
-.link{
+.teamTones{
   stroke: #orange;
   stroke-width: 3px;
 }
 </style>
-
 </head>
 <body>
+  hi
 <script>
   var width= 640;
     height = 480;
@@ -30,7 +30,7 @@
 var graph = {
   // "tones":{"document_tone.tone_categories.tones.score": " ", "document_tone.tone_categories.tones.tone_id": " ",}
   //includes the 3 categories: SOCIAL, EMOTIONAL & LANGUAGE tones
-  "toneScores": [
+  "nodes": [
   {"score": 0.06212, "tone_id": "anger"},
   {"score": 0.104997, "tone_id": "disgust"},
   {"score": 0.065878, "tone_id": "fear"},
@@ -49,7 +49,7 @@ var graph = {
   //take scores from all emloyee's on a team  (which will include 3 categories of scores)
   //show average score in each category based on team member responses
   //link teams together
-  "teamTones":[
+  "links":[
     { "employeeId": 678, "team_id":  272 },
     { "employeeId": 11, "team_id":  274 },
     { "employeeId": 11, "team_id":  272 },
@@ -63,21 +63,23 @@ var graph = {
     { "employeeId": 11, "team_id":  272 },
     { "employeeId": 11, "team_id":  274 },
     { "employeeId": 11, "team_id":  272 },
-    ]
+  ]
   };
-  var nodes = graph.toneScore
-        toneScore.forEach(function(d){
+  // nodes are now employee scores and links are teams of employees
+  var nodes = graph.nodes
+        nodes.forEach(function(d){
           d.score = +d.score;
           d.tone_id = +d.tone_id;
       });
-      links = graph.teamTones;
+      links = graph.links;
       //extrating the tonescore and tonecategory from the data
 
   var force = d3.layout.force()
-  .size([width, height])
-  .nodes(toneScores)
-  .links(teamTones);
-  //creating a force layout object to layout the dimensions of the scores and collective team tones
+    .size([width, height])
+    .nodes(nodes)
+    .links(links);
+  //creating a force layout object to layout and define its properties
+  //including the dimensions of the visualization and the arrays of nodes and links
 
 force.linkDistance(width/3.05);
 // we define the link distance to state how many pixels are in betweent he connected nodes, basically length
@@ -94,24 +96,27 @@ var node = svg.selectAll('.node')
   .attr('class', 'node');
 //plot each employee score and tone id
 
+force.on('end', function(){
 
+  node.attr('r', width/100)
+      .attr('cx', function(d){return d.x;}),
+      .attr('cy', function(d){return d.y;});
 
+  link.attr('x1' function(d) {return d.source.x;}),
+      .attr('y2', function(d) {return d.source.y}),
+      .attr('x1', function(d) {return d.target.x}),
+      .attr('y2', function(d) {return d.target.y});
 
+});
 
+force.start();
+//i'm defining a function that i want to layout to call once the force layout calculations are done
+//force layout updates the x and y properties that define where the node should be centered. to move it we have to set the svg to their new values so they're visible
 
+//now the layout will have set properties in our nodes and link objects that we an use to position them within the svg container
+//as the force layout runs it updates the x and y properties that define where the node should be ceentered. to move the nde we st the appropriate SVG attributes to their new values
+//as long as the nodes have a zero radius  - we can't see em - that's why they're just showing up to the party  ;-)
 
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
+  </script>
 </body>
 </html>
