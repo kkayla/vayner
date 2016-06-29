@@ -85,10 +85,14 @@ force.linkDistance(width/3.05);
 var link  = svg.selectAll('.link')
   .data(links)
   .enter().append('line')
-  .attr('class', 'link')
+  .attr('class', 'link');
 //i draw the links first because we want to see the correlation of employees to teams BEFORE we see the individual responses plotted
 
-
+var node = svg.selectAll('.node')
+  .data(nodes)
+  .enter().append('cirlce')
+  .attr('class', 'node');
+//plot each employee score and tone id
 
 
 
