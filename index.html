@@ -65,27 +65,47 @@ var graph = {
     { "employeeId": 11, "team_id":  272 },
     ]
   };
-  var toneScore = graph.toneScore
-        toneScore.forEach(function(d){
-          d.score = +d.score;
-          d.tone_id = +d.tone_id;
-      }),
-      toneCategory  = graph.toneCategory
+  var nodes = graph.toneScore
         toneScore.forEach(function(d){
           d.score = +d.score;
           d.tone_id = +d.tone_id;
       });
+      links = graph.teamTones;
+      //extrating the tonescore and tonecategory from the data
 
   var force = d3.layout.force()
   .size([width, height])
-  .toneScores(toneScore)
-  .teamTones(teamTones);
-//creating a force layout object to layout the dimensions of the scores and collective team tones
+  .nodes(toneScores)
+  .links(teamTones);
+  //creating a force layout object to layout the dimensions of the scores and collective team tones
 
 force.linkDistance(width/3.05);
-          //extrating the tonescore and tonecategory from the data
-          var force  = d3.layout.force()
-var 
+// we define the link distance to state how many pixels are in betweent he connected nodes, basically length
+
+var link  = svg.selectAll('.link')
+  .data(links)
+  .enter().append('line')
+  .attr('class', 'link')
+//i draw the links first because we want to see the correlation of employees to teams BEFORE we see the individual responses plotted
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>
